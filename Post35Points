@@ -1,0 +1,20 @@
+import requests
+import json
+class Post:
+    def __init__(self,d):
+        self.__dict__=d
+
+    def __str__(self):
+        resulet = " "
+        for k, v in self.__dict__.items():
+            resulet += f'key: {k} ------- value:  {v}  \n'
+        return resulet
+
+userInput = int(input('enter your id'))
+response = requests.get('https://jsonplaceholder.typicode.com/posts')
+for dict in json.loads(response.content):
+     if dict.get('id')==userInput:
+         user1=Post(dict)
+         print(user1)
+         break
+else: print('user not found')
